@@ -147,6 +147,35 @@ delete Waypaper's configuration, your video folder, or the installed packages.
 
 ## Troubleshooting
 
+### Black bars around a video
+
+Waypaper's `fit` mode preserves the complete video frame. If the video and
+display have different aspect ratios, select `fill` to fill the display while
+cropping the excess edges.
+
+If bars remain in `fill` mode, they are probably encoded inside the video
+itself. mpv can crop that inner frame through Waypaper's options:
+
+```ini
+mpvpaper_options = hwdec=auto loop-file=inf video-crop=1204x996+358+0
+```
+
+The rectangle is `WIDTHxHEIGHT+X+Y` and is specific to that video. Remove or
+change `video-crop` before selecting a file with different framing. Preview a
+candidate rectangle before saving it:
+
+```sh
+mpv --video-crop=1204x996+358+0 /path/to/video.webm
+```
+
+Restart the managed renderer after changing `mpvpaper_options`:
+
+```sh
+omarchy-shell waypaper-video-background restart
+```
+
+### Configuration and runtime status
+
 Check the effective Waypaper settings:
 
 ```sh
