@@ -132,34 +132,6 @@ aux paquets installés.
 
 ## Diagnostic
 
-### Bandes noires autour d'une vidéo
-
-Le mode `fit` de Waypaper conserve l'intégralité de l'image. Si le ratio de la
-vidéo diffère de celui de l'écran, choisir `fill` pour remplir l'écran en
-rognant les bords excédentaires.
-
-Si les bandes restent présentes en mode `fill`, elles sont probablement
-encodées dans la vidéo. mpv peut recadrer l'image interne au moyen des options
-Waypaper :
-
-```ini
-mpvpaper_options = hwdec=auto loop-file=inf video-crop=1204x996+358+0
-```
-
-Le rectangle suit la forme `LARGEURxHAUTEUR+X+Y` et dépend de la vidéo. Retirer
-ou modifier `video-crop` avant de choisir un fichier cadré différemment. Tester
-d'abord le rectangle proposé :
-
-```sh
-mpv --video-crop=1204x996+358+0 /chemin/vers/video.webm
-```
-
-Après modification de `mpvpaper_options`, redémarrer le moteur supervisé :
-
-```sh
-omarchy-shell waypaper-video-background restart
-```
-
 ### Configuration et état du service
 
 ```sh

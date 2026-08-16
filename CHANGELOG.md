@@ -17,5 +17,3 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 - Configuration validation that does not start the renderer.
 - English and French installation, rollback, security, and troubleshooting
   documentation.
-- Guidance for distinguishing aspect-ratio letterboxing from black bars
-  encoded inside a video and applying an explicit mpv crop rectangle.
