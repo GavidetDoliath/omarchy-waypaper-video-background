@@ -1,20 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
   <title id="title">Add background</title>
   <desc id="desc">An empty background slot with a large plus sign.</desc>
-  <defs>
-    <linearGradient id="surface" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#20242d"/>
-      <stop offset="1" stop-color="#11141a"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
-      <stop offset="0" stop-color="#ffffff" stop-opacity=".08"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-  <rect width="1600" height="1000" fill="url(#surface)"/>
-  <rect width="1600" height="1000" fill="url(#glow)"/>
-  <rect x="80" y="80" width="1440" height="840" rx="48" fill="none"
-        stroke="#ffffff" stroke-opacity=".28" stroke-width="10" stroke-dasharray="26 24"/>
-  <path d="M800 290v420M590 500h420" fill="none" stroke="#ffffff"
-        stroke-opacity=".92" stroke-width="42" stroke-linecap="round"/>
+  <rect width="1600" height="1000" fill="#000000"/>
+  <path d="M800 300v400M600 500h400" fill="none" stroke="#ffffff"
+        stroke-width="40" stroke-linecap="round"/>
 </svg>

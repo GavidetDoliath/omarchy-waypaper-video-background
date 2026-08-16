@@ -7,6 +7,13 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-08-16
+
+### Changed
+
+- Simplify the `Add` tile to a pure black background and white plus sign,
+  without a decorative border, gradient, or glow.
+
 ## [1.3.0] - 2026-08-16
 
 ### Added
