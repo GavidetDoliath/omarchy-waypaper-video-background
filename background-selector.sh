@@ -8,7 +8,7 @@ readonly state_home="${XDG_STATE_HOME:-$HOME/.local/state}"
 readonly cache_home="${XDG_CACHE_HOME:-$HOME/.cache}"
 readonly waypaper_config="$config_home/waypaper/config.ini"
 readonly selector_cache="$cache_home/omarchy/waypaper-video-selector"
-readonly add_thumbnail="$script_dir/assets/add-background.svg"
+readonly add_thumbnail="$script_dir/assets/add-background-minimal.svg"
 
 fail() {
   local exit_code="$1"
