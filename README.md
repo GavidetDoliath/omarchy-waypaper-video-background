@@ -213,7 +213,8 @@ Validate the repository on Omarchy Quattro:
 ```
 
 The validation script checks the official Omarchy manifest contract, QML, and
-shell syntax without starting the wallpaper.
+shell syntax without starting the wallpaper. See [TESTING.md](TESTING.md) for
+the completed local verification and the remaining public-release matrix.
 
 ## License
 

@@ -180,6 +180,9 @@ omarchy-shell waypaper-video-background start
 ./validate.sh
 ```
 
+Le détail des vérifications locales et des tests restant avant publication se
+trouve dans [TESTING.md](TESTING.md).
+
 ## Licence
 
 [MIT](LICENSE)
