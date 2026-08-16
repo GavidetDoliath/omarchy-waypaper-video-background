@@ -2,11 +2,13 @@
 
 set -euo pipefail
 
+readonly script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 readonly config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
 readonly state_home="${XDG_STATE_HOME:-$HOME/.local/state}"
 readonly cache_home="${XDG_CACHE_HOME:-$HOME/.cache}"
 readonly waypaper_config="$config_home/waypaper/config.ini"
 readonly selector_cache="$cache_home/omarchy/waypaper-video-selector"
+readonly add_thumbnail="$script_dir/assets/add-background.svg"
 
 fail() {
   local exit_code="$1"
@@ -125,11 +127,10 @@ add_media_dir() {
 }
 
 collect_media_dirs() {
-  local theme_name folder
+  local folder
 
-  theme_name="$(sed -n '1p' "$state_home/omarchy/current/theme.name" 2>/dev/null || true)"
   add_media_dir "$state_home/omarchy/current/theme/backgrounds"
-  [[ -n $theme_name ]] && add_media_dir "$config_home/omarchy/backgrounds/$theme_name"
+  add_media_dir "$theme_media_dir"
 
   while IFS= read -r folder; do
     add_media_dir "$folder"
@@ -173,6 +174,29 @@ collect_media() {
       fi
     done < <(find -L "$directory" -maxdepth 1 -type f -print0 2>/dev/null | sort -z)
   done
+}
+
+append_add_row() {
+  local add_row="$add_selection"$'\t'"$add_thumbnail"
+
+  if [[ -z $rows ]]; then
+    rows="$add_row"
+  else
+    rows+=$'\n'"$add_row"
+  fi
+}
+
+open_theme_media_dir() {
+  require_command nautilus
+  require_command setsid
+  require_command uwsm-app
+
+  mkdir -p -- "$theme_media_dir"
+
+  # Match Omarchy's Super+Shift+F launcher, with the current theme's persistent
+  # user background directory supplied as the initial Nautilus location.
+  setsid -f uwsm-app -- nautilus --new-window "$theme_media_dir" \
+    >/dev/null 2>&1
 }
 
 apply_selection() {
@@ -223,6 +247,18 @@ require_command stat
 require_command waypaper
 [[ -r $waypaper_config ]] || fail 78 "Waypaper config is not readable: $waypaper_config"
 [[ $(ini_value backend) == "mpvpaper" ]] || fail 78 "Waypaper backend must be mpvpaper"
+[[ -r $add_thumbnail ]] || fail 78 "Add tile thumbnail is not readable: $add_thumbnail"
+
+theme_name="$(sed -n '1p' "$state_home/omarchy/current/theme.name" 2>/dev/null || true)"
+[[ -n $theme_name ]] || fail 78 "could not resolve the current Omarchy theme"
+case "$theme_name" in
+  . | .. | */* | *$'\n'* | *$'\r'* | *$'\t'*)
+    fail 78 "unsupported current Omarchy theme name: $theme_name"
+    ;;
+esac
+readonly theme_name
+readonly theme_media_dir="$config_home/omarchy/backgrounds/$theme_name"
+readonly add_selection="$selector_cache/Add"
 
 declare -A seen_dirs=()
 declare -A seen_media=()
@@ -233,24 +269,23 @@ image_count=0
 video_count=0
 
 collect_media_dirs
-(( ${#media_dirs[@]} > 0 )) || fail 78 "no readable theme or Waypaper media directories"
 
 if [[ $mode == "--check" ]]; then
   collect_media false
-  printf 'directories=%d\nimages=%d\nvideos=%d\n' \
-    "${#media_dirs[@]}" "$image_count" "$video_count"
+  printf 'directories=%d\nimages=%d\nvideos=%d\nadd_directory=%s\n' \
+    "${#media_dirs[@]}" "$image_count" "$video_count" "$theme_media_dir"
   exit 0
 fi
 
 mkdir -p -- "$selector_cache"
 collect_media true
+append_add_row
 
 if [[ $mode == "--list" ]]; then
   printf '%s\n' "$rows"
   exit 0
 fi
 
-(( image_count + video_count > 0 )) || fail 78 "no supported images or videos found"
 omarchy-shell waypaper-video-background status >/dev/null 2>&1 || \
   fail 69 "Waypaper Video is not enabled in Omarchy Shell"
 
@@ -278,6 +313,10 @@ done
 
 if [[ -s $selection_file ]]; then
   selection="$(<"$selection_file")"
-  [[ -f $selection ]] || fail 78 "selected media no longer exists: $selection"
-  apply_selection "$selection"
+  if [[ $selection == "$add_selection" ]]; then
+    open_theme_media_dir
+  else
+    [[ -f $selection ]] || fail 78 "selected media no longer exists: $selection"
+    apply_selection "$selection"
+  fi
 fi

@@ -7,6 +7,14 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-08-16
+
+### Added
+
+- Append an `Add` tile to the mixed background selector. Activating it creates
+  and opens the current theme's persistent user background directory in
+  Nautilus.
+
 ## [1.2.1] - 2026-08-16
 
 ### Fixed

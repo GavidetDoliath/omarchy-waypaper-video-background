@@ -13,6 +13,8 @@ le plugin donne au moteur de rendu un cycle de vie fiable dans `omarchy-shell`.
 - Waypaper gère le dossier de vidéos, la sélection et les réglages.
 - Les images du thème et les vidéos Waypaper apparaissent ensemble dans le
   sélecteur Omarchy ouvert avec `Super+Ctrl+Espace`.
+- Une dernière tuile **Add** ouvre le dossier personnel du thème courant dans
+  le même gestionnaire de fichiers que `Super+Maj+F`.
 - Changer de thème remplace la vidéo précédente par l'image par défaut choisie
   par le nouveau thème.
 - `mpvpaper` reste au premier plan afin qu'Omarchy Shell supervise son cycle de
@@ -39,8 +41,9 @@ omarchy pkg aur add mpvpaper waypaper
 omarchy pkg add socat ffmpegthumbnailer
 ```
 
-Le plugin utilise également `awk` (`gawk`), `pgrep` (`procps-ng`) et
-`uwsm-app` (`uwsm`).
+Le plugin utilise également `awk` (`gawk`), `pgrep` (`procps-ng`),
+`uwsm-app` (`uwsm`), `nautilus` et `setsid` (`util-linux`). Ces éléments sont
+normalement déjà fournis par Omarchy.
 
 ## Installation sûre
 
@@ -99,7 +102,9 @@ courant et les médias des dossiers Waypaper. Les vidéos reçoivent une vignett
 avec une pellicule. Le choix est enregistré par Waypaper ; une image fixe met
 également à jour le fond de l'écran de verrouillage. Lors d'un changement de
 thème, le hook enregistre et affiche automatiquement l'image choisie par ce
-nouveau thème.
+nouveau thème. La dernière tuile **Add** crée puis ouvre
+`~/.config/omarchy/backgrounds/<thème-courant>/`. Les images ou vidéos copiées
+dans ce dossier apparaissent à la prochaine ouverture du sélecteur de ce thème.
 
 ## Interface et commandes
 
@@ -160,6 +165,9 @@ aux paquets installés.
   nouveau thème afin qu'elle remplace une éventuelle vidéo précédente.
 - Les vignettes vidéo sont mises en cache dans
   `~/.cache/omarchy/waypaper-video-selector/`.
+- Activer **Add** autorise explicitement la création du dossier personnel du
+  thème courant et son ouverture dans Nautilus. Le plugin ne copie, déplace,
+  renomme ou supprime aucun média ajouté dans ce dossier.
 - Utilisation du socket Waypaper `/tmp/mpv-socket-<monitor>`.
 - Arrêt uniquement du processus `mpvpaper` utilisant ce socket exact avant
   son remplacement.

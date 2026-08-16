@@ -13,6 +13,8 @@ the plugin gives the renderer a reliable lifecycle inside `omarchy-shell`.
 - Uses Waypaper as the video folder, picker, and configuration UI.
 - Adds both theme images and Waypaper videos to Omarchy's native background
   selector opened with `Super+Ctrl+Space`.
+- Appends an **Add** tile that opens the current theme's personal background
+  folder in the same file manager as `Super+Shift+F`.
 - Replaces the previous theme's video with the new theme's selected default
   image whenever the Omarchy theme changes.
 - Runs `mpvpaper` in the foreground so Omarchy Shell owns its lifecycle.
@@ -40,9 +42,11 @@ Runtime commands and their Arch packages:
 | `awk` | `gawk` | Read Waypaper's INI file |
 | `pgrep` | `procps-ng` | Retire the renderer using the selected socket |
 | `uwsm-app` | `uwsm` | Open Waypaper in the current desktop session |
+| `nautilus` | `nautilus` | Open the current theme's personal background folder |
+| `setsid` | `util-linux` | Launch that file-manager window independently |
 
-Omarchy normally already provides `gawk`, `procps-ng`, and `uwsm`. Install the
-remaining packages with Omarchy's package helpers:
+Omarchy normally already provides `gawk`, `procps-ng`, `uwsm`, `nautilus`, and
+`util-linux`. Install the remaining packages with Omarchy's package helpers:
 
 ```sh
 omarchy pkg aur add mpvpaper waypaper
@@ -108,7 +112,9 @@ folders configured in Waypaper. Video entries use generated filmstrip
 thumbnails. Selecting any item updates Waypaper and the supervised mpvpaper
 process. Selecting a still image also keeps the Omarchy lock-screen background
 in sync. Changing themes persists and displays the image selected by the new
-theme, replacing any video from the previous one.
+theme, replacing any video from the previous one. The final **Add** tile creates
+and opens `~/.config/omarchy/backgrounds/<current-theme>/`; media copied there
+appears in that theme's selector the next time it is opened.
 
 Open Waypaper later to select another video:
 
@@ -175,6 +181,9 @@ delete Waypaper's configuration, your video folder, or the installed packages.
   so it replaces a video selected under the previous theme.
 - Generated video thumbnails live under
   `~/.cache/omarchy/waypaper-video-selector/`.
+- Activating **Add** explicitly authorizes creation of the current theme's
+  personal background directory and opens it in Nautilus. The plugin does not
+  copy, move, rename, or delete media placed there.
 - It creates the Waypaper-compatible socket `/tmp/mpv-socket-<monitor>`.
 - Before starting, it terminates only an existing user-owned `mpvpaper`
   process whose command line uses that exact socket.

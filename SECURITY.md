@@ -26,4 +26,7 @@ removing marked overrides. It also installs a uniquely named `theme-set` hook,
 which it removes only when the file still carries the plugin's marker.
 Selecting a media item, or changing the Omarchy theme, asks Waypaper to persist
 the resulting explicit background and stores generated video thumbnails only
-in the user's cache.
+in the user's cache. Activating the selector's `Add` tile creates only the
+current theme's user-owned background directory under
+`~/.config/omarchy/backgrounds/` and opens it in Nautilus; the plugin does not
+copy, move, rename, or delete media in that directory.

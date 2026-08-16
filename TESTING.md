@@ -11,6 +11,9 @@ Verified on 2026-08-16 with Omarchy 4.0.0:
   Waypaper media folders; `--check` reports images and videos separately.
 - A missing optional per-theme user background directory does not abort media
   discovery.
+- The last selector row is an `Add` action with the bundled plus-sign
+  thumbnail and resolves to
+  `~/.config/omarchy/backgrounds/<current-theme>/`.
 - Video thumbnails are generated once with `ffmpegthumbnailer` and reused from
   the plugin cache.
 - The selector integration installs and removes its marked JSONC override
