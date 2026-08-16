@@ -18,5 +18,7 @@ omarchy plugin validate "$repo_dir"
 qmllint -I "$omarchy_path/shell" "$repo_dir/Service.qml"
 bash -n "$repo_dir/start-mpvpaper.sh"
 bash -n "$repo_dir/control.sh"
+bash -n "$repo_dir/background-selector.sh"
+bash -n "$repo_dir/selector-integration.sh"
 
 printf 'Validation passed for %s\n' "$repo_dir"

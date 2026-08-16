@@ -7,6 +7,12 @@ Verified on 2026-08-16 with Omarchy 4.0.0:
 - `omarchy plugin validate` passes for the repository root.
 - `qmllint` passes with the installed Omarchy Shell import path.
 - `bash -n` passes for all shell entry points.
+- The mixed selector resolves current-theme images, per-theme user images, and
+  Waypaper media folders; `--check` reports images and videos separately.
+- Video thumbnails are generated once with `ffmpegthumbnailer` and reused from
+  the plugin cache.
+- The selector integration installs and removes its marked JSONC override
+  without changing the surrounding menu extension.
 - `start-mpvpaper.sh --check` resolves an isolated Waypaper fixture without
   starting a renderer.
 - `omarchy plugin add file://... --yes` and installation from the public
@@ -33,4 +39,5 @@ These checks extend the verified single-machine release coverage:
 - [ ] Select videos with `fit`, `fill`, sound off, and sound on.
 - [ ] Test one monitor and a multi-monitor setup.
 - [ ] Confirm pause, resume, restart, shell restart, disable, and rollback.
+- [ ] Select both a theme image and a video from `Super+Ctrl+Space`.
 - [ ] Review marketplace automated validation and security-baseline results.

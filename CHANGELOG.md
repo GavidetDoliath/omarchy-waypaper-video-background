@@ -7,6 +7,17 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-08-16
+
+### Added
+
+- Optional, reversible integration with Omarchy's `Super+Ctrl+Space`
+  background selector.
+- Mixed theme-image and Waypaper-video discovery with cached filmstrip video
+  thumbnails.
+- Persistent media selection through Waypaper while keeping still-image lock
+  backgrounds synchronized with Omarchy.
+
 ## [1.0.1] - 2026-08-16
 
 ### Changed

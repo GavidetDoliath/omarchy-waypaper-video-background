@@ -19,3 +19,8 @@ Omarchy plugins run unsandboxed with the current user's permissions. This
 plugin reads Waypaper configuration, starts and controls mpvpaper, and removes
 only the Waypaper IPC socket selected for the configured monitor. It does not
 request elevated privileges or download and execute remote code.
+
+The optional selector integration runs only when explicitly requested. It
+backs up the user-owned Omarchy menu extension before adding or removing its
+marked override. Selecting a media item asks Waypaper to persist that explicit
+choice and stores generated video thumbnails only in the user's cache.

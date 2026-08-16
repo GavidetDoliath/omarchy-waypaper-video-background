@@ -11,6 +11,8 @@ the plugin gives the renderer a reliable lifecycle inside `omarchy-shell`.
 ## Features
 
 - Uses Waypaper as the video folder, picker, and configuration UI.
+- Adds both theme images and Waypaper videos to Omarchy's native background
+  selector opened with `Super+Ctrl+Space`.
 - Runs `mpvpaper` in the foreground so Omarchy Shell owns its lifecycle.
 - Restarts unexpected crashes with capped exponential backoff.
 - Supports start, stop, restart, pause, resume, and toggle through IPC.
@@ -32,6 +34,7 @@ Runtime commands and their Arch packages:
 | `waypaper` | `waypaper` (AUR) | Graphical picker and configuration |
 | `mpvpaper` | `mpvpaper` (AUR) | Video renderer |
 | `socat` | `socat` | Pause/resume IPC controls |
+| `ffmpegthumbnailer` | `ffmpegthumbnailer` | Video previews in the selector |
 | `awk` | `gawk` | Read Waypaper's INI file |
 | `pgrep` | `procps-ng` | Retire the renderer using the selected socket |
 | `uwsm-app` | `uwsm` | Open Waypaper in the current desktop session |
@@ -41,7 +44,7 @@ remaining packages with Omarchy's package helpers:
 
 ```sh
 omarchy pkg aur add mpvpaper waypaper
-omarchy pkg add socat
+omarchy pkg add socat ffmpegthumbnailer
 ```
 
 ## Install
@@ -88,6 +91,21 @@ omarchy plugin disable omarchy.background
 omarchy plugin enable io.github.gavidetdoliath.waypaper-video-background
 ```
 
+Optionally connect Omarchy's stock background menu to the mixed image/video
+selector:
+
+```sh
+~/.config/omarchy/plugins/io.github.gavidetdoliath.waypaper-video-background/selector-integration.sh install
+```
+
+This explicit setup step backs up and adds one `style.background` override to
+`~/.config/omarchy/extensions/omarchy-menu.jsonc`; it never edits packaged
+Omarchy files. `Super+Ctrl+Space` then shows images from the current theme and
+media from the folders configured in Waypaper. Video entries use generated
+filmstrip thumbnails. Selecting any item updates Waypaper and the supervised
+mpvpaper process. Selecting a still image also keeps the Omarchy lock-screen
+background in sync.
+
 Open Waypaper later to select another video:
 
 ```sh
@@ -96,6 +114,12 @@ omarchy-shell waypaper-video-background open
 
 Waypaper sends the selection to the managed mpvpaper process through its IPC
 socket, so the Omarchy service does not need to be restarted for each video.
+
+Inspect the media sources without opening the selector:
+
+```sh
+~/.config/omarchy/plugins/io.github.gavidetdoliath.waypaper-video-background/background-selector.sh --check
+```
 
 ## Controls
 
@@ -126,6 +150,7 @@ Omarchy shows the incoming Git diff and updates by fast-forward.
 Return to Omarchy's static background before removing the plugin:
 
 ```sh
+~/.config/omarchy/plugins/io.github.gavidetdoliath.waypaper-video-background/selector-integration.sh remove
 omarchy plugin disable io.github.gavidetdoliath.waypaper-video-background
 omarchy plugin enable omarchy.background
 omarchy plugin remove io.github.gavidetdoliath.waypaper-video-background
@@ -137,6 +162,13 @@ delete Waypaper's configuration, your video folder, or the installed packages.
 ## Behavior and security boundaries
 
 - The plugin reads `~/.config/waypaper/config.ini`; it never writes to it.
+- A media choice is explicit consent for Waypaper itself to persist the
+  selected wallpaper in its configuration.
+- The optional selector integration changes only the user-owned Omarchy menu
+  extension, creates a timestamped backup first, and has a matching `remove`
+  command.
+- Generated video thumbnails live under
+  `~/.cache/omarchy/waypaper-video-selector/`.
 - It creates the Waypaper-compatible socket `/tmp/mpv-socket-<monitor>`.
 - Before starting, it terminates only an existing user-owned `mpvpaper`
   process whose command line uses that exact socket.

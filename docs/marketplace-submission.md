@@ -32,8 +32,10 @@ wallpaper
 
 ### Maintainer notes
 
-Waypaper is the graphical video picker. The Omarchy Quattro service supervises
-its mpvpaper backend and provides lifecycle and pause/resume IPC controls.
+Waypaper remains the graphical media configurator. The Omarchy Quattro service
+supervises its mpvpaper backend, provides lifecycle and pause/resume IPC
+controls, and can optionally add videos to Omarchy's native background
+selector through an explicit, reversible user-menu override.
 
 ### Submission checklist
 - [ ] The repository is public and contains installation and removal instructions.

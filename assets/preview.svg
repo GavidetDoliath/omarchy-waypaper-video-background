@@ -44,7 +44,7 @@
     <circle cx="54" cy="52" r="25" fill="#2563eb"/>
     <path d="M44 44 H64 M44 52 H64 M44 60 H58" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
     <text x="98" y="48" fill="#f8fafc" font-family="monospace" font-size="24" font-weight="700">Waypaper</text>
-    <text x="98" y="76" fill="#94a3b8" font-family="sans-serif" font-size="18">pick and configure</text>
+    <text x="98" y="76" fill="#94a3b8" font-family="sans-serif" font-size="18">pick images + videos</text>
 
     <path d="M208 116 V155" stroke="#64748b" stroke-width="3"/>
     <path d="M197 145 L208 158 L219 145" fill="none" stroke="#64748b" stroke-width="3" stroke-linecap="round"/>
@@ -62,7 +62,7 @@
     <circle cx="54" cy="388" r="25" fill="#db6d48"/>
     <path d="M45 374 L66 388 L45 402Z" fill="#fff"/>
     <text x="98" y="384" fill="#f8fafc" font-family="monospace" font-size="24" font-weight="700">mpvpaper</text>
-    <text x="98" y="412" fill="#94a3b8" font-family="sans-serif" font-size="18">render the video</text>
+    <text x="98" y="412" fill="#94a3b8" font-family="sans-serif" font-size="18">render the media</text>
   </g>
 
   <text x="112" y="848" fill="#64748b" font-family="monospace" font-size="19">io.github.gavidetdoliath.waypaper-video-background  •  MIT  •  Omarchy 4</text>
