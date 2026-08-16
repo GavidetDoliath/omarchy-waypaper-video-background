@@ -7,6 +7,15 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-08-16
+
+### Fixed
+
+- Keep building selector sources when the active theme has no optional
+  `~/.config/omarchy/backgrounds/<theme>` directory. Previously the selector
+  exited early for such themes and appeared to work only with themes that had
+  user-specific background extras.
+
 ## [1.2.0] - 2026-08-16
 
 ### Added

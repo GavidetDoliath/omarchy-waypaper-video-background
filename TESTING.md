@@ -9,6 +9,8 @@ Verified on 2026-08-16 with Omarchy 4.0.0:
 - `bash -n` passes for all shell entry points.
 - The mixed selector resolves current-theme images, per-theme user images, and
   Waypaper media folders; `--check` reports images and videos separately.
+- A missing optional per-theme user background directory does not abort media
+  discovery.
 - Video thumbnails are generated once with `ffmpegthumbnailer` and reused from
   the plugin cache.
 - The selector integration installs and removes its marked JSONC override

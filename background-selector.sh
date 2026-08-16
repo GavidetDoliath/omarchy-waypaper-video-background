@@ -115,11 +115,11 @@ thumbnail_for_video() {
 
 add_media_dir() {
   local candidate="$1"
-  [[ -n $candidate ]] || return
+  [[ -n $candidate ]] || return 0
   candidate="$(expand_home_path "$candidate")"
-  [[ -d $candidate ]] || return
-  candidate="$(realpath -e -- "$candidate")"
-  [[ -n ${seen_dirs[$candidate]:-} ]] && return
+  [[ -d $candidate ]] || return 0
+  candidate="$(realpath -e -- "$candidate")" || return 0
+  [[ -n ${seen_dirs[$candidate]:-} ]] && return 0
   seen_dirs[$candidate]=1
   media_dirs+=("$candidate")
 }
