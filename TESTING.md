@@ -9,8 +9,9 @@ Verified on 2026-08-16 with Omarchy 4.0.0:
 - `bash -n` passes for all shell entry points.
 - `start-mpvpaper.sh --check` resolves an isolated Waypaper fixture without
   starting a renderer.
-- `omarchy plugin add file://... --yes` clones the repository into an isolated
-  HOME using the permanent manifest ID.
+- `omarchy plugin add file://... --yes` and installation from the public
+  `https://github.com/GavidetDoliath/omarchy-waypaper-video-background.git`
+  URL both clone into an isolated HOME using the permanent manifest ID.
 - The installed checkout has the same commit as its source, the expected Git
   origin, and a clean worktree.
 - `omarchy plugin update <id> --yes` recognizes the clone as up to date.
@@ -27,7 +28,7 @@ Complete these checks before the public `v1.0.0` release:
 - [x] Existing local Waypaper configuration resolves successfully.
 - [x] Manifest, QML, and shell syntax validation.
 - [x] Isolated Git add, update, remove, and reinstall lifecycle.
-- [ ] Install from the final public GitHub URL.
+- [x] Install, update, remove, and reinstall from the final public GitHub URL.
 - [ ] Enable on a second Omarchy Quattro user or machine.
 - [ ] Select videos with `fit`, `fill`, sound off, and sound on.
 - [ ] Test one monitor and a multi-monitor setup.
