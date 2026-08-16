@@ -1,4 +1,4 @@
-# Fond vidéo Waypaper pour Omarchy
+# Waypaper Video pour Omarchy
 
 [English](README.md)
 
@@ -6,7 +6,7 @@ Plugin de service pour Omarchy Quattro qui supervise le fond vidéo `mpvpaper`
 sélectionné avec Waypaper. Waypaper reste l'interface graphique de sélection ;
 le plugin donne au moteur de rendu un cycle de vie fiable dans `omarchy-shell`.
 
-![Architecture du fond vidéo Waypaper](preview.png)
+![Architecture de Waypaper Video](preview.png)
 
 ## Fonctionnalités
 

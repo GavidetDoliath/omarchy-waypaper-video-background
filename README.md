@@ -1,4 +1,4 @@
-# Waypaper Video Background for Omarchy
+# Waypaper Video for Omarchy
 
 [Français](README.fr.md)
 
@@ -6,7 +6,7 @@ An Omarchy Quattro service plugin that supervises the `mpvpaper` video
 wallpaper selected through Waypaper. Waypaper remains the graphical picker;
 the plugin gives the renderer a reliable lifecycle inside `omarchy-shell`.
 
-![Waypaper Video Background architecture](preview.png)
+![Waypaper Video architecture](preview.png)
 
 ## Features
 

@@ -21,9 +21,9 @@ Verified on 2026-08-16 with Omarchy 4.0.0:
 The install lifecycle uses a test-only `omarchy-shell` stub so the live user
 shell is neither rescanned nor reconfigured.
 
-## Manual release matrix
+## Additional compatibility matrix
 
-Complete these checks before the public `v1.0.0` release:
+These checks extend the verified single-machine release coverage:
 
 - [x] Existing local Waypaper configuration resolves successfully.
 - [x] Manifest, QML, and shell syntax validation.

@@ -9,7 +9,7 @@ reviewed, and the owner has explicitly confirmed every checklist item.
 - Category: `Appearance`
 - Tags: `media`, `quickshell`, `hyprland`
 - Suggested missing tag: `wallpaper`
-- Title: `[Plugin]: Waypaper Video Background`
+- Title: `[Plugin]: Waypaper Video`
 
 ## Issue body
 
@@ -48,6 +48,6 @@ Check all five boxes only after the owner confirms them, then create the issue:
 ```sh
 gh issue create \
   --repo HANCORE-linux/omarchy-plugin-marketplace \
-  --title "[Plugin]: Waypaper Video Background" \
+  --title "[Plugin]: Waypaper Video" \
   --body-file /tmp/omarchy-plugin-submission.md
 ```

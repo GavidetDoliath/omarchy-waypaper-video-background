@@ -12,7 +12,7 @@
 
 - [ ] Update `manifest.json` and `CHANGELOG.md` with the same version.
 - [ ] Keep the default branch installable before pushing.
-- [ ] Create an annotated `v1.0.0` tag and a GitHub release.
+- [ ] Create an annotated `v<version>` tag and a matching GitHub release.
 - [ ] Test `omarchy plugin add <public-git-url>` from the public repository.
 
 ## Marketplace

@@ -7,6 +7,14 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-08-16
+
+### Changed
+
+- Shortened the public display name from `Waypaper Video Background` to
+  `Waypaper Video` while keeping the repository, plugin ID, and IPC target
+  stable.
+
 ## [1.0.0] - 2026-08-16
 
 ### Added
