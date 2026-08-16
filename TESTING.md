@@ -13,6 +13,8 @@ Verified on 2026-08-16 with Omarchy 4.0.0:
   the plugin cache.
 - The selector integration installs and removes its marked JSONC override
   without changing the surrounding menu extension.
+- Re-running the integration installer upgrades the managed menu block while
+  retaining Omarchy's `background` and `wallpaper` route aliases.
 - `start-mpvpaper.sh --check` resolves an isolated Waypaper fixture without
   starting a renderer.
 - `omarchy plugin add file://... --yes` and installation from the public

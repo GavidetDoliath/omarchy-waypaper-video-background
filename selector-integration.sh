@@ -30,7 +30,7 @@ backup_menu() {
 }
 
 install_integration() {
-  local menu_dir backup temporary block
+  local menu_dir backup temporary block current_block
 
   menu_dir="${menu_file%/*}"
   mkdir -p -- "$menu_dir"
@@ -40,8 +40,45 @@ install_integration() {
   [[ -f $menu_file && -r $menu_file && -w $menu_file ]] || \
     fail 73 "menu extension is not a writable file: $menu_file"
 
+  block='  // BEGIN Waypaper Video background selector
+  "style.background": {"icon":"","label":"Background","aliases":["background","wallpaper"],"action":"$HOME/.config/omarchy/plugins/io.github.gavidetdoliath.waypaper-video-background/background-selector.sh"},
+  // END Waypaper Video background selector'
+
   if grep -Fq "$begin_marker" "$menu_file"; then
-    printf 'Waypaper Video background selector is already integrated.\n'
+    grep -Fq "$end_marker" "$menu_file" || \
+      fail 65 "managed selector block is missing its end marker"
+    current_block="$(awk -v begin="$begin_marker" -v end="$end_marker" '
+      index($0, begin) { capture = 1 }
+      capture { print }
+      capture && index($0, end) { exit }
+    ' "$menu_file")"
+    if [[ $current_block == "$block" ]]; then
+      printf 'Waypaper Video background selector is already integrated.\n'
+      exit 0
+    fi
+
+    backup="$(backup_menu)"
+    temporary="$(mktemp "$menu_file.tmp.XXXXXX")"
+    if ! awk -v begin="$begin_marker" -v end="$end_marker" -v block="$block" '
+      index($0, begin) {
+        if (!replaced) print block
+        replaced = 1
+        replacing = 1
+        next
+      }
+      replacing && index($0, end) { replacing = 0; next }
+      !replacing { print }
+      END { if (!replaced) exit 1 }
+    ' "$menu_file" >"$temporary"; then
+      rm -f -- "$temporary"
+      fail 65 "could not update the managed selector block"
+    fi
+
+    chmod --reference="$menu_file" "$temporary"
+    mv -f -- "$temporary" "$menu_file"
+    refresh_menu
+    printf 'Updated the Waypaper Video background selector integration.\n'
+    printf 'Backup: %s\n' "$backup"
     exit 0
   fi
   if grep -Eq "^[[:space:]]*$override_key[[:space:]]*:" "$menu_file"; then
@@ -50,9 +87,6 @@ install_integration() {
 
   backup="$(backup_menu)"
   temporary="$(mktemp "$menu_file.tmp.XXXXXX")"
-  block='  // BEGIN Waypaper Video background selector
-  "style.background": {"action":"$HOME/.config/omarchy/plugins/io.github.gavidetdoliath.waypaper-video-background/background-selector.sh"},
-  // END Waypaper Video background selector'
 
   if ! awk -v block="$block" '
     { print }

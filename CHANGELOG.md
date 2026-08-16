@@ -7,6 +7,16 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-08-16
+
+### Fixed
+
+- Preserve the native `background` and `wallpaper` route aliases in the
+  Omarchy menu override so `Super+Ctrl+Space` opens the media selector instead
+  of falling back to the root menu.
+- Upgrade an existing managed selector block when the integration installer is
+  run again.
+
 ## [1.1.0] - 2026-08-16
 
 ### Added
