@@ -7,6 +7,20 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-08-16
+
+### Added
+
+- Synchronize each Omarchy theme change to its selected default image through
+  Waypaper, replacing any video selected under the previous theme.
+- Install a direct, reversible `Super+Ctrl+Space` Hyprland override so the
+  media selector no longer depends on the Omarchy menu route.
+
+### Changed
+
+- The explicit selector integration now manages the menu action, shortcut,
+  and `theme-set` hook together, with backups and symmetric removal.
+
 ## [1.1.1] - 2026-08-16
 
 ### Fixed

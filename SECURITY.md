@@ -21,6 +21,9 @@ only the Waypaper IPC socket selected for the configured monitor. It does not
 request elevated privileges or download and execute remote code.
 
 The optional selector integration runs only when explicitly requested. It
-backs up the user-owned Omarchy menu extension before adding or removing its
-marked override. Selecting a media item asks Waypaper to persist that explicit
-choice and stores generated video thumbnails only in the user's cache.
+backs up the user-owned Omarchy menu and Hyprland bindings before adding or
+removing marked overrides. It also installs a uniquely named `theme-set` hook,
+which it removes only when the file still carries the plugin's marker.
+Selecting a media item, or changing the Omarchy theme, asks Waypaper to persist
+the resulting explicit background and stores generated video thumbnails only
+in the user's cache.

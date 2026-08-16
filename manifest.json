@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "id": "io.github.gavidetdoliath.waypaper-video-background",
   "name": "Waypaper Video",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "author": "GavidetDoliath",
   "license": "MIT",
-  "description": "Adds images and videos to the Omarchy background selector through Waypaper and supervises mpvpaper.",
+  "description": "Adds theme images and videos to Omarchy's background selector, synchronizes theme changes, and supervises mpvpaper.",
   "kinds": [
     "service"
   ],

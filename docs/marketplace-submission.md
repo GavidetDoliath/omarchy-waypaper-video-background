@@ -35,7 +35,9 @@ wallpaper
 Waypaper remains the graphical media configurator. The Omarchy Quattro service
 supervises its mpvpaper backend, provides lifecycle and pause/resume IPC
 controls, and can optionally add videos to Omarchy's native background
-selector through an explicit, reversible user-menu override.
+selector through explicit, reversible user-menu and keybinding overrides. A
+managed `theme-set` hook restores the new theme's default image after a theme
+change.
 
 ### Submission checklist
 - [ ] The repository is public and contains installation and removal instructions.

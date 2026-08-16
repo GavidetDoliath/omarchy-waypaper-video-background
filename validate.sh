@@ -20,5 +20,6 @@ bash -n "$repo_dir/start-mpvpaper.sh"
 bash -n "$repo_dir/control.sh"
 bash -n "$repo_dir/background-selector.sh"
 bash -n "$repo_dir/selector-integration.sh"
+bash -n "$repo_dir/waypaper-video-background-theme-sync"
 
 printf 'Validation passed for %s\n' "$repo_dir"

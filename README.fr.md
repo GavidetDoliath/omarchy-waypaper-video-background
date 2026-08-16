@@ -13,13 +13,15 @@ le plugin donne au moteur de rendu un cycle de vie fiable dans `omarchy-shell`.
 - Waypaper gère le dossier de vidéos, la sélection et les réglages.
 - Les images du thème et les vidéos Waypaper apparaissent ensemble dans le
   sélecteur Omarchy ouvert avec `Super+Ctrl+Espace`.
+- Changer de thème remplace la vidéo précédente par l'image par défaut choisie
+  par le nouveau thème.
 - `mpvpaper` reste au premier plan afin qu'Omarchy Shell supervise son cycle de
   vie.
 - Les arrêts inattendus sont relancés avec un délai exponentiel plafonné.
 - Les actions démarrer, arrêter, redémarrer, pause et reprise sont exposées en
   IPC.
 - La désactivation du plugin ou l'arrêt du shell coupe le moteur supervisé.
-- Aucun fichier de configuration Waypaper, Hyprland ou Omarchy n'est modifié.
+- Aucun fichier fourni sous `/usr/share/omarchy` n'est modifié.
 
 ## Compatibilité et dépendances
 
@@ -89,13 +91,15 @@ Pour connecter le sélecteur de fond natif d'Omarchy aux images et vidéos :
 ~/.config/omarchy/plugins/io.github.gavidetdoliath.waypaper-video-background/selector-integration.sh install
 ```
 
-Cette étape explicite sauvegarde puis ajoute uniquement l'action
-`style.background` dans
-`~/.config/omarchy/extensions/omarchy-menu.jsonc`. Aucun fichier système
-Omarchy n'est modifié. `Super+Ctrl+Espace` affiche ensuite les images du thème
+Cette étape explicite sauvegarde puis installe trois éléments appartenant à
+l'utilisateur : l'action `style.background` du menu, un raccourci Hyprland
+direct pour `Super+Ctrl+Espace` et un hook Omarchy `theme-set`. Aucun fichier
+système Omarchy n'est modifié. Le sélecteur affiche ensuite les images du thème
 courant et les médias des dossiers Waypaper. Les vidéos reçoivent une vignette
 avec une pellicule. Le choix est enregistré par Waypaper ; une image fixe met
-également à jour le fond de l'écran de verrouillage Omarchy.
+également à jour le fond de l'écran de verrouillage. Lors d'un changement de
+thème, le hook enregistre et affiche automatiquement l'image choisie par ce
+nouveau thème.
 
 ## Interface et commandes
 
@@ -145,12 +149,15 @@ aux paquets installés.
 
 ## Comportement et sécurité
 
-- Lecture seule de `~/.config/waypaper/config.ini`.
+- Lecture de `~/.config/waypaper/config.ini` pour résoudre les réglages.
 - Choisir un média autorise explicitement Waypaper à enregistrer ce fond dans
   sa propre configuration.
-- L'intégration optionnelle ne modifie que l'extension de menu appartenant à
-  l'utilisateur, crée d'abord une sauvegarde horodatée et fournit une commande
-  `remove` symétrique.
+- L'intégration optionnelle ne modifie que l'extension de menu et les
+  raccourcis Hyprland appartenant à l'utilisateur, avec une sauvegarde
+  horodatée avant chaque changement. Elle ajoute aussi un hook `theme-set`
+  identifié et fournit une commande `remove` symétrique.
+- Changer de thème autorise Waypaper à enregistrer l'image par défaut du
+  nouveau thème afin qu'elle remplace une éventuelle vidéo précédente.
 - Les vignettes vidéo sont mises en cache dans
   `~/.cache/omarchy/waypaper-video-selector/`.
 - Utilisation du socket Waypaper `/tmp/mpv-socket-<monitor>`.

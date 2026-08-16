@@ -15,6 +15,10 @@ Verified on 2026-08-16 with Omarchy 4.0.0:
   without changing the surrounding menu extension.
 - Re-running the integration installer upgrades the managed menu block while
   retaining Omarchy's `background` and `wallpaper` route aliases.
+- The integration round trip restores both the user menu and Hyprland binding
+  files byte-for-byte and removes only its managed `theme-set` hook.
+- The theme synchronization `--check` resolves the current Omarchy background
+  and configured Waypaper monitor without changing either one.
 - `start-mpvpaper.sh --check` resolves an isolated Waypaper fixture without
   starting a renderer.
 - `omarchy plugin add file://... --yes` and installation from the public
@@ -42,4 +46,6 @@ These checks extend the verified single-machine release coverage:
 - [ ] Test one monitor and a multi-monitor setup.
 - [ ] Confirm pause, resume, restart, shell restart, disable, and rollback.
 - [ ] Select both a theme image and a video from `Super+Ctrl+Space`.
+- [ ] Change themes after selecting a video and confirm that the new theme's
+  default image replaces it.
 - [ ] Review marketplace automated validation and security-baseline results.

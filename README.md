@@ -13,11 +13,13 @@ the plugin gives the renderer a reliable lifecycle inside `omarchy-shell`.
 - Uses Waypaper as the video folder, picker, and configuration UI.
 - Adds both theme images and Waypaper videos to Omarchy's native background
   selector opened with `Super+Ctrl+Space`.
+- Replaces the previous theme's video with the new theme's selected default
+  image whenever the Omarchy theme changes.
 - Runs `mpvpaper` in the foreground so Omarchy Shell owns its lifecycle.
 - Restarts unexpected crashes with capped exponential backoff.
 - Supports start, stop, restart, pause, resume, and toggle through IPC.
 - Stops the managed renderer when the plugin is disabled or the shell exits.
-- Does not edit Waypaper, Hyprland, or Omarchy configuration files.
+- Never edits packaged files under `/usr/share/omarchy`.
 
 ## Compatibility and requirements
 
@@ -98,13 +100,15 @@ selector:
 ~/.config/omarchy/plugins/io.github.gavidetdoliath.waypaper-video-background/selector-integration.sh install
 ```
 
-This explicit setup step backs up and adds one `style.background` override to
-`~/.config/omarchy/extensions/omarchy-menu.jsonc`; it never edits packaged
-Omarchy files. `Super+Ctrl+Space` then shows images from the current theme and
-media from the folders configured in Waypaper. Video entries use generated
-filmstrip thumbnails. Selecting any item updates Waypaper and the supervised
-mpvpaper process. Selecting a still image also keeps the Omarchy lock-screen
-background in sync.
+This explicit setup step backs up and installs three user-owned integrations:
+the `style.background` menu action, a direct `Super+Ctrl+Space` Hyprland
+binding, and an Omarchy `theme-set` hook. It never edits packaged Omarchy
+files. The selector then shows images from the current theme and media from the
+folders configured in Waypaper. Video entries use generated filmstrip
+thumbnails. Selecting any item updates Waypaper and the supervised mpvpaper
+process. Selecting a still image also keeps the Omarchy lock-screen background
+in sync. Changing themes persists and displays the image selected by the new
+theme, replacing any video from the previous one.
 
 Open Waypaper later to select another video:
 
@@ -161,12 +165,14 @@ delete Waypaper's configuration, your video folder, or the installed packages.
 
 ## Behavior and security boundaries
 
-- The plugin reads `~/.config/waypaper/config.ini`; it never writes to it.
+- The plugin reads `~/.config/waypaper/config.ini` to resolve its settings.
 - A media choice is explicit consent for Waypaper itself to persist the
   selected wallpaper in its configuration.
 - The optional selector integration changes only the user-owned Omarchy menu
-  extension, creates a timestamped backup first, and has a matching `remove`
-  command.
+  extension and Hyprland bindings, creates timestamped backups first, and adds
+  one marked `theme-set` hook. Its matching `remove` command reverses all three.
+- Changing themes authorizes Waypaper to persist the new theme's default image
+  so it replaces a video selected under the previous theme.
 - Generated video thumbnails live under
   `~/.cache/omarchy/waypaper-video-selector/`.
 - It creates the Waypaper-compatible socket `/tmp/mpv-socket-<monitor>`.
