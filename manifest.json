@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.gavidetdoliath.waypaper-video-background",
+  "name": "Waypaper Video Background",
+  "version": "1.0.0",
+  "author": "GavidetDoliath",
+  "license": "MIT",
+  "description": "Supervises the mpvpaper video wallpaper selected through Waypaper on Omarchy Quattro.",
+  "kinds": [
+    "service"
+  ],
+  "entryPoints": {
+    "service": "Service.qml"
+  }
+}
