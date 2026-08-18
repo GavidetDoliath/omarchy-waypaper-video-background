@@ -3,18 +3,21 @@
 [Français](README.fr.md)
 
 An Omarchy Quattro service plugin that supervises the `mpvpaper` video
-wallpaper selected through Waypaper. Waypaper remains the graphical picker;
-the plugin gives the renderer a reliable lifecycle inside `omarchy-shell`.
+wallpaper configured through Waypaper. Day-to-day media selection stays in
+Omarchy's native background selector, while the plugin gives the renderer a
+reliable lifecycle inside `omarchy-shell`.
 
-![Waypaper Video architecture](preview.png)
+https://github.com/user-attachments/assets/e52bdc97-a4bf-4012-ac9b-3fb3308e1577
 
 ## Features
 
-- Uses Waypaper as the video folder, picker, and configuration UI.
+- Uses Waypaper as the configuration and persistence layer behind Omarchy's
+  day-to-day background picker.
 - Adds both theme images and Waypaper videos to Omarchy's native background
   selector opened with `Super+Ctrl+Space`.
-- Appends an **Add** tile that opens the current theme's personal background
-  folder in the same file manager as `Super+Shift+F`.
+- Appends an **Add** tile—the recommended way to add images and videos—which
+  opens the current theme's personal background folder in the same file manager
+  as `Super+Shift+F`.
 - Replaces the previous theme's video with the new theme's selected default
   image whenever the Omarchy theme changes.
 - Runs `mpvpaper` in the foreground so Omarchy Shell owns its lifecycle.
@@ -68,7 +71,11 @@ answer **No**. The plugin remains disabled, which leaves the current static
 background untouched while Waypaper is configured. In a non-interactive
 shell, the plugin remains disabled unless `--enable` is passed explicitly.
 
-## Configure Waypaper
+## One-time Waypaper setup
+
+This initial setup is currently required. The plugin reads Waypaper's existing
+configuration and deliberately does not rewrite it during installation, so it
+does not select the `mpvpaper` backend automatically.
 
 1. Open Waypaper.
 2. Select `mpvpaper` as the backend.
@@ -97,8 +104,7 @@ omarchy plugin disable omarchy.background
 omarchy plugin enable io.github.gavidetdoliath.waypaper-video-background
 ```
 
-Optionally connect Omarchy's stock background menu to the mixed image/video
-selector:
+Install the mixed image/video selector integration (recommended):
 
 ```sh
 ~/.config/omarchy/plugins/io.github.gavidetdoliath.waypaper-video-background/selector-integration.sh install
@@ -116,7 +122,10 @@ theme, replacing any video from the previous one. The final **Add** tile creates
 and opens `~/.config/omarchy/backgrounds/<current-theme>/`; media copied there
 appears in that theme's selector the next time it is opened.
 
-Open Waypaper later to select another video:
+The recommended everyday workflow is to open the selector with
+`Super+Ctrl+Space`, choose **Add**, copy images or videos into the folder that
+opens, then reopen the selector and choose the new media. Open Waypaper directly
+only to change renderer settings or add other media folders:
 
 ```sh
 omarchy-shell waypaper-video-background open

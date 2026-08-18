@@ -3,18 +3,21 @@
 [English](README.md)
 
 Plugin de service pour Omarchy Quattro qui supervise le fond vidéo `mpvpaper`
-sélectionné avec Waypaper. Waypaper reste l'interface graphique de sélection ;
-le plugin donne au moteur de rendu un cycle de vie fiable dans `omarchy-shell`.
+configuré avec Waypaper. Au quotidien, les médias se choisissent dans le
+sélecteur de fond natif d'Omarchy ; le plugin donne au moteur de rendu un cycle
+de vie fiable dans `omarchy-shell`.
 
-![Architecture de Waypaper Video](preview.png)
+https://github.com/user-attachments/assets/e52bdc97-a4bf-4012-ac9b-3fb3308e1577
 
 ## Fonctionnalités
 
-- Waypaper gère le dossier de vidéos, la sélection et les réglages.
+- Waypaper conserve la configuration et le média sélectionné derrière le
+  sélecteur de fond utilisé au quotidien.
 - Les images du thème et les vidéos Waypaper apparaissent ensemble dans le
   sélecteur Omarchy ouvert avec `Super+Ctrl+Espace`.
-- Une dernière tuile **Add** ouvre le dossier personnel du thème courant dans
-  le même gestionnaire de fichiers que `Super+Maj+F`.
+- Une dernière tuile **Add**, recommandée pour ajouter images et vidéos, ouvre
+  le dossier personnel du thème courant dans le même gestionnaire de fichiers
+  que `Super+Maj+F`.
 - Changer de thème remplace la vidéo précédente par l'image par défaut choisie
   par le nouveau thème.
 - `mpvpaper` reste au premier plan afin qu'Omarchy Shell supervise son cycle de
@@ -60,6 +63,13 @@ répondre **No**. Le fond statique actuel reste ainsi actif pendant la
 configuration. Dans un shell non interactif, le plugin reste désactivé tant
 que l'option `--enable` n'est pas fournie explicitement.
 
+### Configuration initiale de Waypaper
+
+Cette configuration initiale est actuellement nécessaire. Le plugin lit la
+configuration Waypaper existante et ne la réécrit volontairement pas pendant
+l'installation : il ne sélectionne donc pas automatiquement le backend
+`mpvpaper`.
+
 Dans Waypaper :
 
 1. choisir `mpvpaper` comme backend ;
@@ -88,7 +98,7 @@ omarchy plugin disable omarchy.background
 omarchy plugin enable io.github.gavidetdoliath.waypaper-video-background
 ```
 
-Pour connecter le sélecteur de fond natif d'Omarchy aux images et vidéos :
+Installer l'intégration au sélecteur d'images et de vidéos (recommandé) :
 
 ```sh
 ~/.config/omarchy/plugins/io.github.gavidetdoliath.waypaper-video-background/selector-integration.sh install
@@ -106,9 +116,15 @@ nouveau thème. La dernière tuile **Add** crée puis ouvre
 `~/.config/omarchy/backgrounds/<thème-courant>/`. Les images ou vidéos copiées
 dans ce dossier apparaissent à la prochaine ouverture du sélecteur de ce thème.
 
+Au quotidien, le parcours recommandé consiste à ouvrir le sélecteur avec
+`Super+Ctrl+Espace`, choisir **Add**, copier les images ou vidéos dans le dossier
+qui s'ouvre, puis rouvrir le sélecteur pour choisir le nouveau média. Waypaper
+ne doit ensuite être ouvert directement que pour modifier les réglages du
+moteur ou ajouter d'autres dossiers de médias.
+
 ## Interface et commandes
 
-Ouvrir Waypaper pour changer de vidéo :
+Ouvrir Waypaper pour modifier sa configuration :
 
 ```sh
 omarchy-shell waypaper-video-background open
